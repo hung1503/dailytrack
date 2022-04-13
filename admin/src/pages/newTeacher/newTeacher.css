@@ -1,0 +1,59 @@
+.newTeacher {
+  flex: 4;
+  margin-left: 20px;
+}
+
+.newTeacherTitle {
+}
+
+.newTeacherForm {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.newTeacherItem {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+.newTeacherItem > label {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.newTeacherItem > input {
+  height: 20px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.newTeacherGender > input {
+  margin-top: 15px;
+}
+
+.newTeacherGender > label {
+  margin: 10px;
+  font-size: 18px;
+}
+
+.newTeacherButton {
+  width: 200px;
+  border: none;
+  padding: 7px 10px;
+  background-color: #a46fe0;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  margin-top: 40px;
+}
+
+.newTeacherButton:hover {
+  background-color: #8e5ccf;
+}
