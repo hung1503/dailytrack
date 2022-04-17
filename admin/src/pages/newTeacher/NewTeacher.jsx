@@ -31,6 +31,10 @@ export default function NewTeacher() {
           <input type="text" className="newTeacherInput" />
         </div>
         <div className="newTeacherItem">
+          <label>Assign Class</label>
+          <input type="text" className="newTeacherInput" />
+        </div>
+        <div className="newTeacherItem">
           <label>Gender</label>
           <div className="newTeacherGender">
             <input type="radio" name="gender" id="male" value="male" />

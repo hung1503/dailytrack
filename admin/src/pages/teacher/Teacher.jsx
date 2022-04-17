@@ -4,9 +4,10 @@ import EmailIcon from "@mui/icons-material/Email";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import PhoneIcon from "@mui/icons-material/Phone";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import ClassIcon from "@mui/icons-material/Class";
 import { Link } from "react-router-dom";
 
-export default function Teacher() {
+export default function Teacher({ teacherInfo }) {
   return (
     <div className="teacher">
       <div className="teacherTitleContainer">
@@ -20,23 +21,35 @@ export default function Teacher() {
           <div className="teacherShowTop">
             <img src="" alt="" className="teacherShowImg" />
             <div className="teacherShowTopTitle">
-              <span className="teacherShowName">John Doe</span>
-              <span className="teacherShowAge">Age: 29</span>
+              <span className="teacherShowName">
+                {teacherInfo.firstName} {teacherInfo.lastName}
+              </span>
+              <span className="teacherShowAge">Age: {teacherInfo.age}</span>
             </div>
           </div>
           <div className="teacherShowBottom">
             <span className="teacherShowTitle">Info</span>
             <div className="teacherShowInfo">
               <EmailIcon className="teacherShowIcon" />
-              <span className="teacherShowInfoTitle">john@gmail.com</span>
+              <span className="teacherShowInfoTitle">{teacherInfo.email}</span>
             </div>
             <div className="teacherShowInfo">
               <AddLocationAltIcon className="teacherShowIcon" />
-              <span className="teacherShowInfoTitle">Vaasa, Finland</span>
+              <span className="teacherShowInfoTitle">
+                {teacherInfo.address}
+              </span>
             </div>
             <div className="teacherShowInfo">
               <PhoneIcon className="teacherShowIcon" />
-              <span className="teacherShowInfoTitle">0123456789</span>
+              <span className="teacherShowInfoTitle">
+                {teacherInfo.phonenumber}
+              </span>
+            </div>
+            <div className="teacherShowInfo">
+              <ClassIcon className="teacherShowIcon" />
+              <span className="teacherShowInfoTitle">
+                Class: {teacherInfo.class}
+              </span>
             </div>
           </div>
         </div>
@@ -62,6 +75,10 @@ export default function Teacher() {
               </div>
               <div className="teacherUpdateItem">
                 <label>Phone number</label>
+                <input type="text" className="teacherUpdateInput" />
+              </div>
+              <div className="teacherUpdateItem">
+                <label>Assign class</label>
                 <input type="text" className="teacherUpdateInput" />
               </div>
             </div>

@@ -1,5 +1,5 @@
-import React from "react";
-import "./studentList.css";
+import React from 'react'
+import "./activities.css"
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
@@ -9,27 +9,26 @@ import FormControl from "@mui/material/FormControl";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
-import { studentRows } from "../../data";
 
-export default function StudentList() {
-  const [data, setData] = React.useState(studentRows);
+export default function Activities({activitiesInfo}) {
+  const [data, setData] = React.useState(activitiesInfo);
   const [searchQuery, setSearchQuery] = React.useState("");
   const handleDelete = (id) => {
     setData(data.filter((row) => row.id !== id));
   };
-
+  
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
 
   const foundData =
-  searchQuery === ""
-    ? data
-    : data.filter((row) => {
-        return (
-        (row.firstName).toLowerCase().includes(searchQuery.toLowerCase())
-    )
-  });
+    searchQuery === ""
+      ? data
+      : data.filter((row) => {
+          return (
+          (row.firstName).toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    });
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -40,8 +39,8 @@ export default function StudentList() {
       sortable: false,
       renderCell: (params) => {
         return (
-          <div className="studentList">
-            <img src={params.row.avatar} className="studentListImg" alt="" />
+          <div className="activityList">
+            <img src={params.row.avatar} className="activityListImg" alt="" />
             {params.row.firstName} {params.row.lastName}
           </div>
         );
@@ -58,37 +57,11 @@ export default function StudentList() {
       field: "email",
       headerName: "Email",
       width: 200,
-      renderCell: (params) => {
-        return <div>{params.row.parentsInfo.email}</div>;
-      },
     },
     {
       field: "phonenumber",
       headerName: "Phone number",
       width: 200,
-      renderCell: (params) => {
-        return (
-          <div>
-            Phone 1:{params.row.parentsInfo.phone1}
-            <br />
-            Phone 2:{params.row.parentsInfo.phone2}
-          </div>
-        );
-      },
-    },
-    {
-      field: "activities",
-      headerName: "Activities",
-      width: 130,
-      renderCell: (params) => {
-        return (
-          <div>
-            <Link to={"/students/" + params.row.id +"/activities"}>
-              <button className="studentListEdit">See in details</button>
-            </Link>
-          </div>
-        )
-      }
     },
     {
       field: "action",
@@ -96,13 +69,13 @@ export default function StudentList() {
       width: 200,
       renderCell: (params) => {
         return (
-          <div className="studentList">
-            <Link to={"/students/" + params.row.id}>
-              <button className="studentListEdit">Edit</button>
+          <div className="activityList">
+            <Link to={"/activities/" + params.row.id}>
+              <button className="activityListEdit">Edit</button>
             </Link>
             <DeleteOutlineIcon
               onClick={() => handleDelete(params.row.id)}
-              className="studentListDelete"
+              className="activityListDelete"
             />
           </div>
         );
@@ -111,12 +84,12 @@ export default function StudentList() {
   ];
 
   return (
-    <div className="studentListContainer">
-      <div className="studentListUp">
+    <div className="activityListContainer">
+      <div className="activityListUp">
         <Box sx={{ "& > :not(style)": { m: 1 } }}>
           <FormControl variant="standard">
             <InputLabel htmlFor="input-with-icon-adornment">
-              Search for student's first name
+              Search for activity's first name
             </InputLabel>
             <Input
               id="input-with-icon-adornment"
@@ -128,8 +101,8 @@ export default function StudentList() {
               onChange={handleSearch}
             />
           </FormControl>
-          <Link to="/newStudent">
-            <button className="studentAddBtn">Add student</button>
+          <Link to="/newactivity">
+            <button className="activityAddBtn">Add activity</button>
           </Link>
         </Box>
       </div>

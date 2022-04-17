@@ -1,16 +1,16 @@
-.studentListContainer {
+.classListContainer {
   flex: 4;
-  height: 600px;
+  height: 400px;
 }
 
-.studentListUp {
+.classListUp {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.studentAddBtn {
+.classAddBtn {
   width: 150px;
   border: none;
   padding: 5px;
@@ -24,25 +24,22 @@
   margin-left: 20px;
 }
 
-.studentAddButton:hover {
+.classAddButton:hover {
   background-color: #8e5ccf;
 }
 
 
-.studentList {
+.classList {
   display: flex;
   align-items: center;
 }
 
-.studentListImg {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
+.classListTeacher {
+  list-style: none;
+  margin-left: -20px;
 }
 
-.studentListEdit {
+.classListEdit {
   border: none;
   border-radius: 10px;
   padding: 5px 10px;
@@ -53,11 +50,11 @@
   transition: all 0.5s ease-out;
 }
 
-.studentListEdit:hover {
+.classListEdit:hover {
   background-color: #2f54cf;
 }
 
-.studentListDelete {
+.classListDelete {
   color: red;
   cursor: pointer;
 }

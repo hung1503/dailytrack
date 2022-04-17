@@ -1,5 +1,5 @@
 import React from "react";
-import "./studentList.css";
+import "./classList.css";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
@@ -9,10 +9,10 @@ import FormControl from "@mui/material/FormControl";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
-import { studentRows } from "../../data";
+import { classRows } from "../../data";
 
-export default function StudentList() {
-  const [data, setData] = React.useState(studentRows);
+export default function ClassList() {
+  const [data, setData] = React.useState(classRows);
   const [searchQuery, setSearchQuery] = React.useState("");
   const handleDelete = (id) => {
     setData(data.filter((row) => row.id !== id));
@@ -23,72 +23,48 @@ export default function StudentList() {
   };
 
   const foundData =
-  searchQuery === ""
-    ? data
-    : data.filter((row) => {
-        return (
-        (row.firstName).toLowerCase().includes(searchQuery.toLowerCase())
-    )
-  });
+    searchQuery === ""
+      ? data
+      : data.filter((row) => {
+          return (
+          (row.firstName).toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    });
+
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
     {
-      field: "fullName",
-      headerName: "Full name",
-      width: 200,
-      sortable: false,
+      field: "className",
+      headerName: "Class name",
+      width: 110,
+      renderCell: (params) => {
+        return <div className="classList">{params.row.className}</div>;
+      },
+    },
+    {
+      field: "teacher",
+      headerName: "Teacher",
+      width: 150,
       renderCell: (params) => {
         return (
-          <div className="studentList">
-            <img src={params.row.avatar} className="studentListImg" alt="" />
-            {params.row.firstName} {params.row.lastName}
-          </div>
+          <ul className="classListTeacher">
+            {params.row.teacher.map((teacher) => (
+              <li key={teacher.id} className="classListTeacher">
+                {teacher.firstName} {teacher.lastName}
+              </li>
+            ))}
+          </ul>
         );
       },
     },
     {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      width: 70,
-    },
-
-    {
-      field: "email",
-      headerName: "Email",
-      width: 200,
+      field: "students",
+      headerName: "Students",
+      width: 110,
       renderCell: (params) => {
-        return <div>{params.row.parentsInfo.email}</div>;
+        return <div>{params.row.students.length}</div>;
       },
-    },
-    {
-      field: "phonenumber",
-      headerName: "Phone number",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div>
-            Phone 1:{params.row.parentsInfo.phone1}
-            <br />
-            Phone 2:{params.row.parentsInfo.phone2}
-          </div>
-        );
-      },
-    },
-    {
-      field: "activities",
-      headerName: "Activities",
-      width: 130,
-      renderCell: (params) => {
-        return (
-          <div>
-            <Link to={"/students/" + params.row.id +"/activities"}>
-              <button className="studentListEdit">See in details</button>
-            </Link>
-          </div>
-        )
-      }
     },
     {
       field: "action",
@@ -96,13 +72,13 @@ export default function StudentList() {
       width: 200,
       renderCell: (params) => {
         return (
-          <div className="studentList">
-            <Link to={"/students/" + params.row.id}>
-              <button className="studentListEdit">Edit</button>
+          <div className="classList">
+            <Link to={"/classes/" + params.row.id}>
+              <button className="classListEdit">Edit</button>
             </Link>
             <DeleteOutlineIcon
               onClick={() => handleDelete(params.row.id)}
-              className="studentListDelete"
+              className="classListDelete"
             />
           </div>
         );
@@ -111,12 +87,12 @@ export default function StudentList() {
   ];
 
   return (
-    <div className="studentListContainer">
-      <div className="studentListUp">
+    <div className="classListContainer">
+      <div className="classListUp">
         <Box sx={{ "& > :not(style)": { m: 1 } }}>
           <FormControl variant="standard">
             <InputLabel htmlFor="input-with-icon-adornment">
-              Search for student's first name
+              Search for class
             </InputLabel>
             <Input
               id="input-with-icon-adornment"
@@ -128,13 +104,13 @@ export default function StudentList() {
               onChange={handleSearch}
             />
           </FormControl>
-          <Link to="/newStudent">
-            <button className="studentAddBtn">Add student</button>
+          <Link to="/newClass">
+            <button className="classAddBtn">Add Class</button>
           </Link>
         </Box>
       </div>
       <DataGrid
-        rows={foundData}
+        rows={data}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}

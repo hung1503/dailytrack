@@ -1,5 +1,13 @@
 .teacherListContainer {
   flex: 4;
+  height: 600px;
+}
+
+.teacherListUp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .teacherList {
@@ -33,4 +41,22 @@
 .teacherListDelete {
   color: red;
   cursor: pointer;
+}
+
+.teacherAddBtn {
+  width: 150px;
+  border: none;
+  padding: 5px;
+  background-color: #a46fe0;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.teacherAddButton:hover {
+  background-color: #8e5ccf;
 }
