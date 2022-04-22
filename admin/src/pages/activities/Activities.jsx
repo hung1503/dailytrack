@@ -2,66 +2,71 @@ import React from 'react'
 import "./activities.css"
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
-import Input from "@mui/material/Input";
-import InputLabel from "@mui/material/InputLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import FormControl from "@mui/material/FormControl";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 
 export default function Activities({activitiesInfo}) {
-  const [data, setData] = React.useState(activitiesInfo);
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const [data, setData] = React.useState([activitiesInfo]);
+  const date = new Date();
+  const today = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
   const handleDelete = (id) => {
     setData(data.filter((row) => row.id !== id));
   };
-  
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const foundData =
-    searchQuery === ""
-      ? data
-      : data.filter((row) => {
-          return (
-          (row.firstName).toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    });
 
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: "date", 
+      headerName: "Date", 
+      width: 90,
+      renderCell: (params) => {
+        return (
+          <div>
+            {params.row.date}
+          </div>
+        )
+      }
+    },
     {
-      field: "fullName",
-      headerName: "Full name",
-      width: 200,
+      field: "routine",
+      headerName: "Daily activities",
+      width: 400,
       sortable: false,
       renderCell: (params) => {
         return (
           <div className="activityList">
-            <img src={params.row.avatar} className="activityListImg" alt="" />
-            {params.row.firstName} {params.row.lastName}
+            {params.row.routine.map((info) => {
+              return (
+                <div key={info.id}>
+                  <p>{info.time} - {info.activity} / </p>
+                </div>
+                );
+              })}
           </div>
         );
       },
     },
     {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      width: 70,
+      field: "arrival time",
+      headerName: "Arrival time",
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <div>
+            {params.row.timeTable.arrival}
+          </div>
+        )
+      }
     },
-
     {
-      field: "email",
-      headerName: "Email",
-      width: 200,
-    },
-    {
-      field: "phonenumber",
-      headerName: "Phone number",
-      width: 200,
+      field: "pickup time",
+      headerName: "Pickup time",
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <div>
+            {params.row.timeTable.departure}
+          </div>
+        )
+      }
     },
     {
       field: "action",
@@ -70,8 +75,8 @@ export default function Activities({activitiesInfo}) {
       renderCell: (params) => {
         return (
           <div className="activityList">
-            <Link to={"/activities/" + params.row.id}>
-              <button className="activityListEdit">Edit</button>
+            <Link to={"/students/" + activitiesInfo.id + "/activities/" + params.row.date}>
+              <button className="activityListEdit">See details</button>
             </Link>
             <DeleteOutlineIcon
               onClick={() => handleDelete(params.row.id)}
@@ -86,32 +91,20 @@ export default function Activities({activitiesInfo}) {
   return (
     <div className="activityListContainer">
       <div className="activityListUp">
-        <Box sx={{ "& > :not(style)": { m: 1 } }}>
-          <FormControl variant="standard">
-            <InputLabel htmlFor="input-with-icon-adornment">
-              Search for activity's first name
-            </InputLabel>
-            <Input
-              id="input-with-icon-adornment"
-              startAdornment={
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              }
-              onChange={handleSearch}
-            />
-          </FormControl>
-          <Link to="/newactivity">
-            <button className="activityAddBtn">Add activity</button>
-          </Link>
-        </Box>
+        <h1 className="activityTitle">{activitiesInfo.firstName} {activitiesInfo.lastName} - Class: {activitiesInfo.class}</h1>
+            <form className="activityForm">
+              <div className="activityListItem">
+                <label>Date</label>
+                <input required type="text" className="activityListInput date" value={today}/>
+              </div>
+                <button className="activityAddBtn">Add date</button>
+            </form> 
       </div>
       <DataGrid
-        rows={foundData}
+        rows={activitiesInfo.activities}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
         disableSelectionOnClick
       />
     </div>

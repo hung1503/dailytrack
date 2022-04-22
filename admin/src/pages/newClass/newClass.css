@@ -1,14 +1,14 @@
-.newStudent {
+.newClass {
   flex: 4;
   margin-left: 20px;
 }
 
-.newStudentForm {
+.newClassForm {
   display: flex;
   flex-wrap: wrap;
 }
 
-.newStudentItem {
+.newClassItem {
   width: 400px;
   display: flex;
   flex-direction: column;
@@ -16,29 +16,20 @@
   margin-right: 20px;
 }
 
-.newStudentItem > label {
+.newClassItem > label {
   margin-bottom: 10px;
   font-size: 14px;
   font-weight: 600;
 }
 
-.newStudentItem > input {
+.newClassItem > input {
   height: 20px;
   padding: 10px;
   border: 1px solid gray;
   border-radius: 5px;
 }
 
-.newStudentGender > input {
-  margin-top: 15px;
-}
-
-.newStudentGender > label {
-  margin: 10px;
-  font-size: 18px;
-}
-
-.newStudentButton {
+.newClassButton {
   width: 200px;
   border: none;
   padding: 7px 10px;
@@ -51,6 +42,6 @@
   margin-top: 40px;
 }
 
-.newStudentButton:hover {
+.newClassButton:hover {
   background-color: #8e5ccf;
 }

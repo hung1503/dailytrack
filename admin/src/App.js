@@ -3,17 +3,23 @@ import Topbar from "./components/topbar/Topbar";
 import Home from "./pages/home/Home";
 import "./app.css";
 import { Route, Routes, useMatch } from "react-router-dom";
+
 import TeacherList from "./pages/teacherList/TeacherList";
 import Teacher from "./pages/teacher/Teacher";
 import NewTeacher from "./pages/newTeacher/NewTeacher";
+
 import StudentList from "./pages/studentList/StudentList";
 import Student from "./pages/student/Student";
+import NewStudent from "./pages/newStudent/NewStudent";
+
 import ClassList from "./pages/classList/ClassList";
 import Class from "./pages/class/Class";
-import { teacherRows, studentRows, classRows } from "./data";
-import Activities from "./pages/activities/Activities";
-import { ConstructionOutlined } from "@mui/icons-material";
+import NewClass from "./pages/newClass/NewClass";
 
+import Activities from "./pages/activities/Activities";
+import DailyActivity from "./pages/dailyActivity/DailyActivity";
+
+import { teacherRows, studentRows, classRows } from "./data";
 function App() {
   const teacherMatch = useMatch("/teachers/:id");
   const teacherInfo = teacherMatch
@@ -29,14 +35,24 @@ function App() {
       )
     : null;
 
-  const activites = useMatch("/students/:id/activities");
-  console.log(activites)
-  const activitesInfo = activites
+  const activitiesMatch = useMatch("/students/:id/activities");
+  const activitiesInfo = activitiesMatch
     ? studentRows.find(
-        (student) => student.id === Number(activites.params.id)
+        (student) => student.id === Number(activitiesMatch.params.id)
       )
     : null;
-  console.log(activitesInfo)
+  
+  const dailyActivityMatch = useMatch("/students/:id/activities/:date");
+  const dailyActivityInfo = dailyActivityMatch
+    ? studentRows.find(
+        (student) => student.id === Number(dailyActivityMatch.params.id)
+      )
+    : null;
+  const dateInfo = dailyActivityMatch
+    ? dailyActivityInfo.activities.find(
+      (date) => date.date === dailyActivityMatch.params.date
+    )
+    : null;
   
   const classMatch = useMatch("/classes/:id");
   const classInfo = classMatch
@@ -64,14 +80,20 @@ function App() {
             element={<Student studentInfo={studentInfo} />}
           />
           <Route 
-            path="/students/:id/activites" 
-            element={<Activities activitesInfo={activitesInfo} />}
+            path="/students/:id/activities" 
+            element={<Activities activitiesInfo={activitiesInfo} />}
           />
+          <Route 
+            path="/students/:id/activities/:date" 
+            element={<DailyActivity dateInfo={dateInfo} dailyActivityInfo={dailyActivityInfo}/>}  
+          />
+          <Route path="/newStudent" element={<NewStudent />} />
           <Route path="/classes" element={<ClassList />} />
           <Route
             path="/classes/:id"
             element={<Class classInfo={classInfo} />}
           />
+          <Route path="/newClass" element={<NewClass />} />
         </Routes>
       </div>
     </div>

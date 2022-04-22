@@ -210,15 +210,43 @@ export const studentRows = [
         id: 1,
         date: "2020-01-01",
         routine: [
-          {
+          { 
+            id: 1,
             time: "10:00",
             activity: "Have music class",
           },
           {
+            id: 2,
             time: "11:00",
             activity: "Have lunch",
           },
           {
+            id: 3,
+            time: "12:00",
+            activity: "Sleep"
+          }
+        ],
+        timeTable: {
+          arrival: "10:00",
+          departure: "11:00",
+        },
+      },
+      {
+        id: 2,
+        date: "2020-01-02",
+        routine: [
+          { 
+            id: 1,
+            time: "10:00",
+            activity: "Have music class",
+          },
+          {
+            id: 2,
+            time: "11:00",
+            activity: "Have lunch",
+          },
+          {
+            id: 3,
             time: "12:00",
             activity: "Sleep"
           }

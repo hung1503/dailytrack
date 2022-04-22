@@ -1,14 +1,13 @@
-.newStudent {
+.dailyActivityContainer {
   flex: 4;
   margin-left: 20px;
 }
 
-.newStudentForm {
-  display: flex;
-  flex-wrap: wrap;
+.dailyActivityForm {
+  display:flexbox;
 }
 
-.newStudentItem {
+.dailyActivityItem {
   width: 400px;
   display: flex;
   flex-direction: column;
@@ -16,29 +15,28 @@
   margin-right: 20px;
 }
 
-.newStudentItem > label {
+.dailyActivityItem > label {
   margin-bottom: 10px;
   font-size: 14px;
   font-weight: 600;
 }
 
-.newStudentItem > input {
+.dailyActivityItem > input {
   height: 20px;
   padding: 10px;
   border: 1px solid gray;
   border-radius: 5px;
 }
 
-.newStudentGender > input {
-  margin-top: 15px;
+.time {
+  width: 100px;
 }
 
-.newStudentGender > label {
-  margin: 10px;
-  font-size: 18px;
+.activity {
+  width: 600px;
 }
 
-.newStudentButton {
+.dailyActivityButton {
   width: 200px;
   border: none;
   padding: 7px 10px;
@@ -48,9 +46,13 @@
   cursor: pointer;
   font-size: 16px;
   transition: all 0.3s ease;
-  margin-top: 40px;
+  margin: 20px 0;
 }
 
-.newStudentButton:hover {
+.dailyActivityButton:hover {
   background-color: #8e5ccf;
+}
+
+.dailyActivityTable {
+  height: 600px;
 }

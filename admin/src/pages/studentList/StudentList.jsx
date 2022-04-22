@@ -138,7 +138,6 @@ export default function StudentList() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
         disableSelectionOnClick
       />
     </div>

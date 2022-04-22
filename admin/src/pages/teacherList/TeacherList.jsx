@@ -112,7 +112,6 @@ export default function TeacherList() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
         disableSelectionOnClick
       />
     </div>

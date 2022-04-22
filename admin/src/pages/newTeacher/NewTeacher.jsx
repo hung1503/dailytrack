@@ -38,11 +38,11 @@ export default function NewTeacher() {
           <label>Gender</label>
           <div className="newTeacherGender">
             <input type="radio" name="gender" id="male" value="male" />
-            <label for="male">Male</label>
+            <label htmlFor="male">Male</label>
             <input type="radio" name="gender" id="female" value="female" />
-            <label for="female">Female</label>
+            <label htmlFor="female">Female</label>
             <input type="radio" name="gender" id="other" value="other" />
-            <label for="other">Other</label>
+            <label htmlFor="other">Other</label>
           </div>
         </div>
         <div>
