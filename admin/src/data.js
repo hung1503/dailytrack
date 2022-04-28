@@ -119,8 +119,8 @@ export const studentRows = [
       name2: "b",
       phone1: "123456789",
       phone2: "123456789",
-      email: "jon@gmail.com",
     },
+    email: "jon@gmail.com",
     class: "1A",
     age: 4,
     address: "Vaasa, Finland",
@@ -130,17 +130,45 @@ export const studentRows = [
         date: "2020-01-01",
         routine: [
           {
+            id: 1,
             time: "10:00",
             activity: "Have music class",
           },
           {
+            id: 2,
             time: "11:00",
             activity: "Have lunch",
           },
           {
+            id: 3,
             time: "12:00",
-            activity: "Sleep"
-          }
+            activity: "Sleep",
+          },
+        ],
+        timeTable: {
+          arrival: "10:00",
+          departure: "11:00",
+        },
+      },
+      {
+        id: 2,
+        date: "2020-01-02",
+        routine: [
+          {
+            id: 1,
+            time: "10:00",
+            activity: "Have music class",
+          },
+          {
+            id: 2,
+            time: "11:00",
+            activity: "Have lunch",
+          },
+          {
+            id: 3,
+            time: "12:00",
+            activity: "Sleep",
+          },
         ],
         timeTable: {
           arrival: "10:00",
@@ -160,8 +188,8 @@ export const studentRows = [
       name2: "b",
       phone1: "123456789",
       phone2: "123456789",
-      email: "jon@gmail.com",
     },
+    email: "jon@gmail.com",
     class: "1A",
     age: 4,
     address: "Vaasa, Finland",
@@ -171,46 +199,6 @@ export const studentRows = [
         date: "2020-01-01",
         routine: [
           {
-            time: "10:00",
-            activity: "Have music class",
-          },
-          {
-            time: "11:00",
-            activity: "Have lunch",
-          },
-          {
-            time: "12:00",
-            activity: "Sleep"
-          }
-        ],
-        timeTable: {
-          arrival: "10:00",
-          departure: "11:00",
-        },
-      },
-    ],
-    avatar:
-      "https://pbs.twimg.com/profile_images/1455185376876826625/s1AjSxph_400x400.jpg",
-  },  {
-    id: 3,
-    lastName: "A",
-    firstName: "B",
-    parentsInfo: {
-      name1: "a",
-      name2: "b",
-      phone1: "123456789",
-      phone2: "123456789",
-      email: "jon@gmail.com",
-    },
-    class: "1A",
-    age: 4,
-    address: "Vaasa, Finland",
-    activities: [
-      {
-        id: 1,
-        date: "2020-01-01",
-        routine: [
-          { 
             id: 1,
             time: "10:00",
             activity: "Have music class",
@@ -223,8 +211,8 @@ export const studentRows = [
           {
             id: 3,
             time: "12:00",
-            activity: "Sleep"
-          }
+            activity: "Sleep",
+          },
         ],
         timeTable: {
           arrival: "10:00",
@@ -235,7 +223,7 @@ export const studentRows = [
         id: 2,
         date: "2020-01-02",
         routine: [
-          { 
+          {
             id: 1,
             time: "10:00",
             activity: "Have music class",
@@ -248,8 +236,8 @@ export const studentRows = [
           {
             id: 3,
             time: "12:00",
-            activity: "Sleep"
-          }
+            activity: "Sleep",
+          },
         ],
         timeTable: {
           arrival: "10:00",
@@ -259,7 +247,77 @@ export const studentRows = [
     ],
     avatar:
       "https://pbs.twimg.com/profile_images/1455185376876826625/s1AjSxph_400x400.jpg",
-  },  {
+  },
+  {
+    id: 3,
+    lastName: "A",
+    firstName: "B",
+    parentsInfo: {
+      name1: "a",
+      name2: "b",
+      phone1: "123456789",
+      phone2: "123456789",
+    },
+    email: "jon@gmail.com",
+    class: "1A",
+    age: 4,
+    address: "Vaasa, Finland",
+    activities: [
+      {
+        id: 1,
+        date: "2020-01-01",
+        routine: [
+          {
+            id: 1,
+            time: "10:00",
+            activity: "Have music class",
+          },
+          {
+            id: 2,
+            time: "11:00",
+            activity: "Have lunch",
+          },
+          {
+            id: 3,
+            time: "12:00",
+            activity: "Sleep",
+          },
+        ],
+        timeTable: {
+          arrival: "10:00",
+          departure: "11:00",
+        },
+      },
+      {
+        id: 2,
+        date: "2020-01-02",
+        routine: [
+          {
+            id: 1,
+            time: "10:00",
+            activity: "Have music class",
+          },
+          {
+            id: 2,
+            time: "11:00",
+            activity: "Have lunch",
+          },
+          {
+            id: 3,
+            time: "12:00",
+            activity: "Sleep",
+          },
+        ],
+        timeTable: {
+          arrival: "10:00",
+          departure: "11:00",
+        },
+      },
+    ],
+    avatar:
+      "https://pbs.twimg.com/profile_images/1455185376876826625/s1AjSxph_400x400.jpg",
+  },
+  {
     id: 4,
     lastName: "A",
     firstName: "B",
@@ -268,8 +326,8 @@ export const studentRows = [
       name2: "b",
       phone1: "123456789",
       phone2: "123456789",
-      email: "jon@gmail.com",
     },
+    email: "jon@gmail.com",
     class: "1A",
     age: 4,
     address: "Vaasa, Finland",
@@ -279,17 +337,45 @@ export const studentRows = [
         date: "2020-01-01",
         routine: [
           {
+            id: 1,
             time: "10:00",
             activity: "Have music class",
           },
           {
+            id: 2,
             time: "11:00",
             activity: "Have lunch",
           },
           {
+            id: 3,
             time: "12:00",
-            activity: "Sleep"
-          }
+            activity: "Sleep",
+          },
+        ],
+        timeTable: {
+          arrival: "10:00",
+          departure: "11:00",
+        },
+      },
+      {
+        id: 2,
+        date: "2020-01-02",
+        routine: [
+          {
+            id: 1,
+            time: "10:00",
+            activity: "Have music class",
+          },
+          {
+            id: 2,
+            time: "11:00",
+            activity: "Have lunch",
+          },
+          {
+            id: 3,
+            time: "12:00",
+            activity: "Sleep",
+          },
         ],
         timeTable: {
           arrival: "10:00",
@@ -299,7 +385,8 @@ export const studentRows = [
     ],
     avatar:
       "https://pbs.twimg.com/profile_images/1455185376876826625/s1AjSxph_400x400.jpg",
-  },  {
+  },
+  {
     id: 5,
     lastName: "A",
     firstName: "B",
@@ -308,8 +395,8 @@ export const studentRows = [
       name2: "b",
       phone1: "123456789",
       phone2: "123456789",
-      email: "jon@gmail.com",
     },
+    email: "jon@gmail.com",
     class: "1A",
     age: 4,
     address: "Vaasa, Finland",
@@ -319,17 +406,45 @@ export const studentRows = [
         date: "2020-01-01",
         routine: [
           {
+            id: 1,
             time: "10:00",
             activity: "Have music class",
           },
           {
+            id: 2,
             time: "11:00",
             activity: "Have lunch",
           },
           {
+            id: 3,
             time: "12:00",
-            activity: "Sleep"
-          }
+            activity: "Sleep",
+          },
+        ],
+        timeTable: {
+          arrival: "10:00",
+          departure: "11:00",
+        },
+      },
+      {
+        id: 2,
+        date: "2020-01-02",
+        routine: [
+          {
+            id: 1,
+            time: "10:00",
+            activity: "Have music class",
+          },
+          {
+            id: 2,
+            time: "11:00",
+            activity: "Have lunch",
+          },
+          {
+            id: 3,
+            time: "12:00",
+            activity: "Sleep",
+          },
         ],
         timeTable: {
           arrival: "10:00",
