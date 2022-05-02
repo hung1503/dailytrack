@@ -1,0 +1,62 @@
+.dailyActivityContainer {
+  flex: 4;
+  margin-left: 20px;
+}
+
+.dailyActivityTop {
+  line-height: 2;
+}
+
+.dailyActivityForm {
+  display: flexbox;
+}
+
+.dailyActivityItem {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+.dailyActivityItem > label {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dailyActivityItem > input {
+  height: 20px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.time {
+  width: 100px;
+}
+
+.activity {
+  width: 600px;
+}
+
+.dailyActivityButton {
+  width: 200px;
+  border: none;
+  padding: 7px 10px;
+  background-color: #a46fe0;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  margin: 20px 0;
+}
+
+.dailyActivityButton:hover {
+  background-color: #8e5ccf;
+}
+
+.dailyActivityTable {
+  height: 600px;
+}

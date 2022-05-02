@@ -1,0 +1,86 @@
+.activityListContainer {
+  flex: 4;
+  height: 600px;
+}
+
+.activityListUp {
+  margin-bottom: 20px;
+}
+
+.activityTitle{
+  font-size: 40px;
+  font-weight: 600;
+  margin: 10px;
+  text-align: left;
+}
+
+.activityForm{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin: 10px;
+}
+
+.activityListItem > label {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.activityListItem > input {
+  height: 20px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.activityList {
+  display: flex;
+  align-items: center;
+}
+
+.activityListImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.activityListEdit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #617fe2;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: all 0.5s ease-out;
+}
+
+.activityListEdit:hover {
+  background-color: #2f54cf;
+}
+
+.activityListDelete {
+  color: red;
+  cursor: pointer;
+}
+
+.activityAddBtn {
+  width: 150px;
+  border: none;
+  padding: 5px;
+  background-color: #a46fe0;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  margin: 0 20px;
+}
+
+.activityAddButton:hover {
+  background-color: #8e5ccf;
+}

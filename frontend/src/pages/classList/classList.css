@@ -1,0 +1,60 @@
+.classListContainer {
+  flex: 4;
+  height: 400px;
+}
+
+.classListUp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.classAddBtn {
+  width: 150px;
+  border: none;
+  padding: 5px;
+  background-color: #a46fe0;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.classAddButton:hover {
+  background-color: #8e5ccf;
+}
+
+
+.classList {
+  display: flex;
+  align-items: center;
+}
+
+.classListTeacher {
+  list-style: none;
+  margin-left: -20px;
+}
+
+.classListEdit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #617fe2;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: all 0.5s ease-out;
+}
+
+.classListEdit:hover {
+  background-color: #2f54cf;
+}
+
+.classListDelete {
+  color: red;
+  cursor: pointer;
+}
