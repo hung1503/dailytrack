@@ -3,7 +3,9 @@ const Class = require("../models/Class");
 const jwt = require("jsonwebtoken");
 
 router.get("/", async (req, res) => {
-  const classes = await Class.find({});
+  const classes = await Class.find({})
+    .populate("students", { firstName: 1, lastName: 1, email: 1 })
+    .populate("teachers");
   res.send(classes);
 });
 
@@ -19,13 +21,12 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   const body = req.body;
 
-  const foundClass = await Class.find({ className: body.className });
+  const foundClass = await Class.find({ class: body.class });
   if (foundClass.length > 0) {
     res.status(400).send("Class already exists");
   } else {
     const newClass = new Class({
-      className: body.className,
-      teachers: body.teacher,
+      class: body.class,
     });
 
     const savedClass = await newClass.save();
@@ -48,8 +49,7 @@ router.put("/:id", async (req, res) => {
   const body = req.body;
 
   const newClass = await Class.findByIdAndUpdate(req.params.id, {
-    className: body.className,
-    teachers: body.teacher,
+    class: body.class,
   });
 
   res.json(newClass.toJSON());

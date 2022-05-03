@@ -1,10 +1,13 @@
 const router = require("express").Router();
 const Student = require("../models/Student");
+const Class = require("../models/Class");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 router.get("/", async (req, res) => {
-  const students = await Student.find({}).populate("activities");
+  const students = await Student.find({})
+    .populate("activities")
+    .populate("classId", { class: 1 });
   res.send(students);
 });
 
@@ -26,14 +29,14 @@ router.post("/", async (req, res) => {
   } else {
     const saltRound = 10;
     const passwordHash = await bcrypt.hash(body.password, saltRound);
-
+    const className = await Class.findById(body.classId);
     const student = new Student({
       username: body.username,
       password: passwordHash,
       email: body.email,
       firstName: body.firstName,
       lastName: body.lastName,
-      class: body.class,
+      classId: className._id,
       age: body.age,
       avatar: body.avatar,
       parentsInfo: {
@@ -45,6 +48,8 @@ router.post("/", async (req, res) => {
     });
 
     const savedStudent = await student.save();
+    className.students = className.students.concat(savedStudent._id);
+    await className.save();
     res.json(savedStudent.toJSON());
   }
 });

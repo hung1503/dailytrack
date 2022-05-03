@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import Home from "./pages/home/Home";
 import "./app.css";
 import { Route, Routes, useMatch } from "react-router-dom";
-import studentService from "./services/function/student";
-import teacherService from "./services/function/teacher";
-import activityService from "./services/function/activity";
-import classService from "./services/function/class";
 
 import TeacherList from "./pages/teacherList/TeacherList";
 import Teacher from "./pages/teacher/Teacher";
@@ -26,8 +22,8 @@ import { initTeacher } from "./reducer/teacherReducer";
 function App() {
   const [classes, setClasses] = useState([]);
   const dispatch = useDispatch();
-  const students = useSelector((state) => state.student);
-  const teachers = useSelector((state) => state.teacher);
+  const students = useSelector((state) => state.students);
+  const teachers = useSelector((state) => state.teachers);
 
   useEffect(() => {
     dispatch(initStudent());

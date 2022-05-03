@@ -26,6 +26,7 @@ router.post("/", async (req, res) => {
   } else {
     const saltRound = 10;
     const passwordHash = await bcrypt.hash(body.password, saltRound);
+    const className = await Class.findById(body.classId);
 
     const teacher = new Teacher({
       username: body.username,
@@ -34,12 +35,14 @@ router.post("/", async (req, res) => {
       lastName: body.lastName,
       email: body.email,
       phonenumber: body.phonenumber,
-      class: body.class,
+      classId: className._id,
       address: body.address,
       avatar: body.avatar,
     });
 
     const savedTeacher = await teacher.save();
+    className.teachers = className.teachers.concat(savedTeacher._id);
+    await className.save();
     res.json(savedTeacher.toJSON());
   }
 });
