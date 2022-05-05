@@ -15,6 +15,7 @@ export default function StudentList({ students }) {
   const [searchQuery, setSearchQuery] = React.useState("");
   console.log(students);
   const handleDelete = (id) => {
+    console.log(id);
     setData(data.filter((row) => row.id !== id));
   };
 

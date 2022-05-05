@@ -12,7 +12,7 @@ const getAll = () => {
   return response.then((response) => response.data);
 };
 
-const create = async (newObject) => {
+const createDate = async (newObject) => {
   const config = {
     headers: { Authorization: token },
   };
@@ -21,12 +21,22 @@ const create = async (newObject) => {
   return response.data;
 };
 
+const creatActivity = (id, newObject) => {
+  const response = axios.post(`${baseUrl}/${id}/routine`, newObject);
+  return response.then((response) => response.data);
+};
+
+const addingParentTime = (id, newObject) => {
+  const response = axios.put(`${baseUrl}/${id}/parentTime`, newObject);
+  return response.then((response) => response.data);
+};
+
 const update = (id, newObject) => {
   const response = axios.put(`${baseUrl}/${id}`, newObject);
   return response.then((response) => response.data);
 };
 
-const remove = (id) => {
+const removeDate = (id) => {
   const config = {
     headers: { Authorization: token },
   };
@@ -34,4 +44,20 @@ const remove = (id) => {
   return response.then((response) => response.data);
 };
 
-export default { getAll, create, update, setToken, remove };
+const removeRoutine = (id, object) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  return axios.delete(`${baseUrl}/${id}/routine`, object, config);
+};
+
+export default {
+  getAll,
+  createDate,
+  creatActivity,
+  addingParentTime,
+  update,
+  setToken,
+  removeDate,
+  removeRoutine,
+};

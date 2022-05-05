@@ -18,18 +18,20 @@ import DailyActivity from "./pages/dailyActivity/DailyActivity";
 import { useDispatch, useSelector } from "react-redux";
 import { initStudent } from "./reducer/studentReducer";
 import { initTeacher } from "./reducer/teacherReducer";
+import { initActivity } from "./reducer/activityReducer";
 
 function App() {
   const [classes, setClasses] = useState([]);
   const dispatch = useDispatch();
   const students = useSelector((state) => state.students);
   const teachers = useSelector((state) => state.teachers);
+  const activities = useSelector((state) => state.activities);
 
   useEffect(() => {
     dispatch(initStudent());
     dispatch(initTeacher());
+    dispatch(initActivity());
   }, [dispatch]);
-  console.log(students);
 
   const teacherMatch = useMatch("/teachers/:id");
   const teacherInfo = teacherMatch

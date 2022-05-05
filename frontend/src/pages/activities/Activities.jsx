@@ -3,15 +3,21 @@ import "./activities.css";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addActivity } from "../../reducer/activityReducer";
 
 export default function Activities({ activitiesInfo }) {
-  const [data, setData] = React.useState([activitiesInfo]);
-  console.log(data);
-  const date = new Date();
-  const today =
-    date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+  const [data, setData] = React.useState(activitiesInfo.activities);
+  const [date, setDate] = React.useState("");
   const handleDelete = (id) => {
-    setData(data.filter((row) => row.id !== id));
+    console.log(id);
+    setData(data.filter((row) => row._id !== id));
+  };
+  const dispatch = useDispatch();
+
+  const handleNewDate = (e) => {
+    dispatch(addActivity({ date: date, studentId: activitiesInfo.id }));
+    setDate("");
   };
 
   const columns = [
@@ -62,7 +68,7 @@ export default function Activities({ activitiesInfo }) {
               <button className="activityListEdit">See details</button>
             </Link>
             <DeleteOutlineIcon
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
               className="activityListDelete"
             />
           </div>
@@ -78,16 +84,22 @@ export default function Activities({ activitiesInfo }) {
           {activitiesInfo.firstName} {activitiesInfo.lastName} - Class:{" "}
           {activitiesInfo.class}
         </h1>
-        <form className="activityForm">
+        <form className="activityForm" onSubmit={handleNewDate}>
           <div className="activityListItem">
             <label>Date</label>
-            <input required type="text" className="activityListInput date" />
+            <input
+              id="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              required
+              className="activityListInput date"
+            />
           </div>
           <button className="activityAddBtn">Add date</button>
         </form>
       </div>
       <DataGrid
-        rows={activitiesInfo.activities}
+        rows={data}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}

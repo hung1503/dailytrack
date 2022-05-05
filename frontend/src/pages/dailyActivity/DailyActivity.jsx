@@ -2,11 +2,38 @@ import React from "react";
 import "./dailyActivity.css";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { useDispatch } from "react-redux";
+import {
+  addActivityRoutine,
+  deleteRoutine,
+} from "../../reducer/activityReducer";
 
 export default function DailyActivity({ dateInfo, dailyActivityInfo }) {
   const [data, setData] = React.useState(dateInfo.routine);
+  const [time, setTime] = React.useState("");
+  const [activity, setActivity] = React.useState("");
+  const dispatch = useDispatch();
   const handleDelete = (id) => {
-    setData(data.filter((row) => row.id !== id));
+    const ok = window.confirm("Are you sure you want to delete this?");
+    if (!ok) {
+      return;
+    }
+    dispatch(deleteRoutine(dateInfo._id, { routineId: id }));
+    console.log({
+      date: dateInfo._id,
+      id,
+    });
+  };
+
+  const handleAddRoutine = (e) => {
+    e.preventDefault();
+    const newRoutine = {
+      time: time,
+      activity: activity,
+    };
+    dispatch(addActivityRoutine(dateInfo._id, newRoutine));
+    setTime("");
+    setActivity("");
   };
 
   const columns = [
@@ -31,7 +58,7 @@ export default function DailyActivity({ dateInfo, dailyActivityInfo }) {
         return (
           <div className="studentList">
             <DeleteOutlineIcon
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
               className="studentListDelete"
             />
           </div>
@@ -58,14 +85,24 @@ export default function DailyActivity({ dateInfo, dailyActivityInfo }) {
         )}
       </div>
 
-      <form className="dailyActivityForm">
+      <form className="dailyActivityForm" onSubmit={handleAddRoutine}>
         <div className="dailyActivityItem">
           <label>Time</label>
-          <input required type="text" className="dailyActivityInput time" />
+          <input
+            required
+            className="dailyActivityInput time"
+            onChange={(e) => setTime(e.target.value)}
+            value={time}
+          />
         </div>
         <div className="dailyActivityItem">
           <label>Activity</label>
-          <input required type="text" className="dailyActivityInput activity" />
+          <input
+            required
+            className="dailyActivityInput activity"
+            onChange={(e) => setActivity(e.target.value)}
+            value={activity}
+          />
         </div>
         <div>
           <button className="dailyActivityButton">Add activity</button>

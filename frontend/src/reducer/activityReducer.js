@@ -7,7 +7,24 @@ const activityReducer = (state = [], action) => {
     case "ADD_ACTIVITY":
       return [...state, action.data];
     case "DELETE_ACTIVITY":
-      return state.filter((activity) => activity.id !== action.id);
+      return state.filter((activity) => activity._id !== action.id);
+    case "DELETE_ROUTINE":
+      const stateRoutine = state.find(
+        (activity) => activity._id === action.data.id
+      );
+      const newRoutine = stateRoutine.routine.filter(
+        (routine) => routine._id !== action.data.routine.routineId
+      );
+      console.log(newRoutine);
+      return state.map((activity) => {
+        if (activity._id === action.data.id) {
+          return {
+            ...activity,
+            routine: newRoutine,
+          };
+        }
+        return activity;
+      });
     default:
       return state;
   }
@@ -25,7 +42,27 @@ export const initActivity = () => {
 
 export const addActivity = (activity) => {
   return async (dispatch) => {
-    const data = await activityService.add(activity);
+    const data = await activityService.createDate(activity);
+    dispatch({
+      type: "ADD_ACTIVITY",
+      data,
+    });
+  };
+};
+
+export const addActivityRoutine = (id, activity) => {
+  return async (dispatch) => {
+    const data = await activityService.creatActivity(id, activity);
+    dispatch({
+      type: "ADD_ACTIVITY",
+      data,
+    });
+  };
+};
+
+export const addParentTime = (id, activity) => {
+  return async (dispatch) => {
+    const data = await activityService.addingParentTime(id, activity);
     dispatch({
       type: "ADD_ACTIVITY",
       data,
@@ -35,10 +72,24 @@ export const addActivity = (activity) => {
 
 export const deleteActivity = (id) => {
   return async (dispatch) => {
-    await activityService.delete(id);
+    await activityService.removeDate(id);
     dispatch({
       type: "DELETE_ACTIVITY",
       id,
+    });
+  };
+};
+
+export const deleteRoutine = (id, routine) => {
+  const data = {
+    id,
+    routine,
+  };
+  return async (dispatch) => {
+    await activityService.removeRoutine(id, routine);
+    dispatch({
+      type: "DELETE_ROUTINE",
+      data,
     });
   };
 };

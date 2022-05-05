@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 router.get("/", async (req, res) => {
-  const teachers = await Teacher.find({}).populate("class");
+  const teachers = await Teacher.find({}).populate("classId");
   res.send(teachers);
 });
 
