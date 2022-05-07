@@ -1,0 +1,9 @@
+.classContainer {
+  flex: 4;
+  margin-left: 20px;
+}
+
+.classTable {
+  margin-top: 20px;
+  height: 600px;
+}

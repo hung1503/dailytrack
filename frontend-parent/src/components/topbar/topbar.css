@@ -1,0 +1,34 @@
+.topbar {
+  width: 100%;
+  height: 70px;
+  background-color: #c3c3c3;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.topbarWrapper {
+  height: 100%;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 30px;
+  color: brown;
+  cursor: pointer;
+}
+
+.topRight {
+  display: flex;
+  align-items: center;
+}
+
+.topButton {
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 25px;
+}

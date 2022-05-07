@@ -5,7 +5,7 @@ const config = require("../utils/config");
 const Student = require("../models/Student");
 const Teacher = require("../models/Teacher");
 
-router.post("/student", async (req, res) => {
+router.post("/parent", async (req, res) => {
   const body = req.body;
   const student = await Student.findOne({ username: body.username });
   const passwordCorrect =

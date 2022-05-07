@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Teacher = require("../models/Teacher");
+const Class = require("../models/Class");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
@@ -60,13 +61,13 @@ router.delete("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const body = req.body;
-
+  const className = await Class.findById(body.classId);
   const teacher = {
     firstName: body.firstName,
     lastName: body.lastName,
     email: body.email,
     phonenumber: body.phonenumber,
-    class: body.class,
+    classId: className._id,
     address: body.address,
     avatar: body.avatar,
   };

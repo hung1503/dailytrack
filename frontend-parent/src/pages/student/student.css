@@ -1,0 +1,163 @@
+.student {
+  flex: 4;
+  padding: 20px;
+}
+
+.studentTitleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.studentAddButton {
+  width: 80px;
+  border: none;
+  padding: 5px;
+  background-color: #a46fe0;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.studentAddButton:hover {
+  background-color: #8e5ccf;
+}
+
+.studentContainer {
+  display: flex;
+  margin-top: 20px;
+}
+
+.studentShow {
+  flex: 1;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px #000000;
+  box-shadow: 0px 0px 15px -10px #000000;
+}
+
+.studentUpdate {
+  flex: 2;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px #000000;
+  box-shadow: 0px 0px 15px -10px #000000;
+  margin-left: 20px;
+}
+
+.studentShowTop {
+  display: flex;
+  align-items: center;
+}
+
+.studentShowImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.studentShowTopTitle {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.studentShowName {
+  font-weight: 600;
+}
+
+.studentShowAge {
+  font-weight: 300;
+}
+
+.studentShowBottom {
+  margin-top: 20px;
+}
+
+.studentShowTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #a46fe0;
+}
+
+.studentShowInfo {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  color: #444;
+}
+
+.studentShowIcon {
+  font-size: 16px !important;
+}
+
+.studentShowInfoTitle {
+  margin-left: 10px;
+}
+
+.studentUpdateTitle {
+  font-style: 24px;
+  font-weight: 600;
+}
+
+.studentUpdateForm {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.studentUpdateItem {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.studentUpdateItem > label {
+  margin-bottom: 5px;
+  font-style: 14px;
+}
+
+.studentUpdateInput {
+  border: none;
+  width: 250px;
+  border-bottom: 1px solid gray;
+}
+
+.studentUpdateRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.studentUpdateUpload {
+  display: flex;
+  align-items: center;
+}
+
+.studentUpdateImg {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.studentUpdateIcon {
+  cursor: pointer;
+}
+
+.studentUpdateButton {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: rgb(90, 93, 241);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.studentUpdateButton:hover {
+  background-color: rgb(70, 73, 221);
+}
