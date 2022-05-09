@@ -17,12 +17,15 @@ import Activities from "./pages/activities/Activities";
 import DailyActivity from "./pages/dailyActivity/DailyActivity";
 
 import Topbar from "./components/topbar/Topbar";
+import Sidebar from "./components/sidebar/Sidebar";
+import Notification from "./components/notification/Notification";
 
 import { useDispatch, useSelector } from "react-redux";
 import { initStudent } from "./reducer/studentReducer";
 import { initTeacher } from "./reducer/teacherReducer";
 import { initActivity } from "./reducer/activityReducer";
 import { initClass } from "./reducer/classReducer";
+import { noti } from "./reducer/notificationReducer";
 
 import activityService from "./services/function/activity";
 import loginTeacherService from "./services/login/loginTeacher";
@@ -36,7 +39,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Sidebar from "./components/sidebar/Sidebar";
 
 const theme = createTheme();
 
@@ -126,13 +128,16 @@ function App() {
           setUsername("");
           setPassword("");
           setUser(userTeacher);
+          dispatch(noti("Login Successful", 2000, "success"));
         } catch (error) {
           console.log(error);
+          dispatch(noti("Login Failed", 2000, "error"));
         }
       };
 
       return (
         <ThemeProvider theme={theme}>
+          <Notification />
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -204,6 +209,7 @@ function App() {
       <Topbar user={user} handleLogout={handleLogout} />
       <div className="container">
         <Sidebar />
+        <Notification />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route
