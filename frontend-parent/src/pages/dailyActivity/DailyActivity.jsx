@@ -2,7 +2,7 @@ import React from "react";
 import "./dailyActivity.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch } from "react-redux";
-import { addActivityRoutine } from "../../reducer/activityReducer";
+import { addParentTime } from "../../reducer/activityReducer";
 
 export default function DailyActivity({ dateInfo, oneStudentData }) {
   const [data, setData] = React.useState(dateInfo.routine);
@@ -13,10 +13,10 @@ export default function DailyActivity({ dateInfo, oneStudentData }) {
   const handleAddRoutine = (e) => {
     e.preventDefault();
     const newRoutine = {
-      arrive: arrive,
-      pickup: pickup,
+      arrival: arrive,
+      departure: pickup,
     };
-    dispatch(addActivityRoutine(dateInfo._id, newRoutine));
+    dispatch(addParentTime(dateInfo._id, newRoutine));
     setArrive("");
     setPickup("");
   };

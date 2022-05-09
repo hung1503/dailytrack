@@ -27,14 +27,12 @@ router.post("/parent", async (req, res) => {
   //token exprire in 1 day
   const token = jwt.sign(studentForToken, config.SECRET, { expiresIn: "1d" });
 
-  res
-    .status(200)
-    .send({
-      token,
-      username: student.username,
-      firstname: student.firstName,
-      lastname: student.lastName,
-    });
+  res.status(200).send({
+    token,
+    username: student.username,
+    firstname: student.firstName,
+    lastname: student.lastName,
+  });
 });
 
 router.post("/teacher", async (req, res) => {

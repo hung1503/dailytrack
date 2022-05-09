@@ -21,19 +21,27 @@ const createDate = async (newObject) => {
   return response.data;
 };
 
-const creatActivity = (id, newObject) => {
+const creatActivity = async (id, newObject) => {
   const config = {
     headers: { Authorization: token },
   };
-  const response = axios.post(`${baseUrl}/${id}/routine`, newObject, config);
+  const response = await axios.post(
+    `${baseUrl}/${id}/routine`,
+    newObject,
+    config
+  );
   return response.then((response) => response.data);
 };
 
-const addingParentTime = (id, newObject) => {
+const addingParentTime = async (id, newObject) => {
   const config = {
     headers: { Authorization: token },
   };
-  const response = axios.post(`${baseUrl}/${id}/parentTime`, newObject, config);
+  const response = await axios.post(
+    `${baseUrl}/${id}/parentTime`,
+    newObject,
+    config
+  );
   return response.then((response) => response.data);
 };
 

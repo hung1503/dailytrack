@@ -11,12 +11,15 @@ import Activities from "./pages/activities/Activities";
 import DailyActivity from "./pages/dailyActivity/DailyActivity";
 
 import Topbar from "./components/topbar/Topbar";
+import Notification from "./components/notification/Notification";
+import Sidebar from "./components/sidebar/Sidebar";
 
 import { useDispatch, useSelector } from "react-redux";
 import { initStudent } from "./reducer/studentReducer";
 import { initTeacher } from "./reducer/teacherReducer";
 import { initActivity } from "./reducer/activityReducer";
 import { initClass } from "./reducer/classReducer";
+import { noti } from "./reducer/notificationReducer";
 
 import activityService from "./services/function/activity";
 import loginParentService from "./services/login/loginParents";
@@ -30,7 +33,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import EscalatorWarningIcon from "@mui/icons-material/EscalatorWarning";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Sidebar from "./components/sidebar/Sidebar";
 
 const theme = createTheme();
 
@@ -49,7 +51,7 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem("loggedUser");
+    const loggedUserJSON = window.localStorage.getItem("loggedStudent");
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
@@ -69,7 +71,7 @@ function App() {
     : null;
 
   const handleLogout = () => {
-    window.localStorage.removeItem("loggedUser");
+    window.localStorage.removeItem("loggedStudent");
     setUser(null);
   };
 
@@ -84,17 +86,24 @@ function App() {
             username,
             password,
           });
-          window.localStorage.setItem("loggedUser", JSON.stringify(userParent));
+          window.localStorage.setItem(
+            "loggedStudent",
+            JSON.stringify(userParent)
+          );
           activityService.setToken(userParent.token);
           setUsername("");
           setPassword("");
+          setUser(userParent);
+          dispatch(noti("Login Successful", 3000, "success"));
         } catch (error) {
           console.log(error);
+          dispatch(noti("Login Failed", 3000, "error"));
         }
       };
 
       return (
         <ThemeProvider theme={theme}>
+          <Notification />
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -165,6 +174,7 @@ function App() {
       <Topbar user={user} handleLogout={handleLogout} />
       <div className="container">
         <Sidebar />
+        <Notification />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route
