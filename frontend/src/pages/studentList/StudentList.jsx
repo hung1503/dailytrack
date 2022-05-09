@@ -34,17 +34,9 @@ export default function StudentList({ students }) {
 
   const columns = [
     {
-      field: "id",
-      headerName: "ID",
-      width: 70,
-      renderCell: (params) => {
-        return <div>{params.row.length}</div>;
-      },
-    },
-    {
       field: "fullName",
       headerName: "Full name",
-      width: 200,
+      width: 150,
       sortable: false,
       renderCell: (params) => {
         return (
@@ -106,12 +98,8 @@ export default function StudentList({ students }) {
         return (
           <div className="studentList">
             <Link to={"/students/" + params.row.id}>
-              <button className="studentListEdit">Edit</button>
+              <button className="studentListEdit">See profile</button>
             </Link>
-            <DeleteOutlineIcon
-              onClick={() => handleDelete(params.row.id)}
-              className="studentListDelete"
-            />
           </div>
         );
       },

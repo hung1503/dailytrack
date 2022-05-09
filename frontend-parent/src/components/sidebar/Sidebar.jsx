@@ -15,12 +15,12 @@ export default function Sidebar() {
           <ul className="sidebarList">
             <Link to="/students" className="link">
               <li className="sidebarListItem">
-                <ChildCareIcon className="sidebarIcon" /> Students
+                <ChildCareIcon className="sidebarIcon" /> Profile
               </li>
             </Link>
-            <Link to="/classes" className="link">
+            <Link to="/activities" className="link">
               <li className="sidebarListItem">
-                <BookIcon /> Classes
+                <BookIcon /> Activities
               </li>
             </Link>
             <Link to="/teachers" className="link">

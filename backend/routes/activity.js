@@ -61,7 +61,7 @@ router.post("/:id/routine", async (req, res) => {
 router.post("/:id/parentTime", (req, res) => {
   const body = req.body;
   const id = req.params.id;
-
+  console.log(body);
   Activity.findByIdAndUpdate(
     { _id: id },
     {
@@ -116,7 +116,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id/routine", (req, res) => {
+router.put("/:id/routine", (req, res) => {
   const body = req.body;
   const id = req.params.id;
   const activity = Activity.findById(id);

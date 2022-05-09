@@ -4,14 +4,17 @@ import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addActivity } from "../../reducer/activityReducer";
+import { addActivity, deleteActivity } from "../../reducer/activityReducer";
 
 export default function Activities({ activitiesInfo }) {
   const [data, setData] = React.useState(activitiesInfo.activities);
   const [date, setDate] = React.useState("");
   const handleDelete = (id) => {
-    console.log(id);
-    setData(data.filter((row) => row._id !== id));
+    const ok = window.confirm("Are you sure you want to delete this?");
+    if (!ok) {
+      return;
+    }
+    dispatch(deleteActivity(id));
   };
   const dispatch = useDispatch();
 
@@ -101,8 +104,8 @@ export default function Activities({ activitiesInfo }) {
       <DataGrid
         rows={data}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={8}
+        rowsPerPageOptions={[8]}
         disableSelectionOnClick
         getRowId={(row) => row._id}
       />

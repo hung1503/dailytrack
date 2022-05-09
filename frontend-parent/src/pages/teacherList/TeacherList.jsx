@@ -60,24 +60,6 @@ export default function TeacherList({ teachers }) {
       headerName: "Phone number",
       width: 200,
     },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="teacherList">
-            <Link to={"/teachers/" + params.row.id}>
-              <button className="teacherListEdit">Edit</button>
-            </Link>
-            <DeleteOutlineIcon
-              onClick={() => handleDelete(params.row.id)}
-              className="teacherListDelete"
-            />
-          </div>
-        );
-      },
-    },
   ];
 
   return (

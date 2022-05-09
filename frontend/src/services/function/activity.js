@@ -48,7 +48,8 @@ const removeRoutine = (id, object) => {
   const config = {
     headers: { Authorization: token },
   };
-  return axios.delete(`${baseUrl}/${id}/routine`, object, config);
+  const response = axios.put(`${baseUrl}/${id}/routine`, object, config);
+  return response.then((response) => response.data);
 };
 
 export default {

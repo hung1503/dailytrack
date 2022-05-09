@@ -1,39 +1,24 @@
 import React from "react";
 import "./dailyActivity.css";
 import { DataGrid } from "@mui/x-data-grid";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { useDispatch } from "react-redux";
-import {
-  addActivityRoutine,
-  deleteRoutine,
-} from "../../reducer/activityReducer";
+import { addActivityRoutine } from "../../reducer/activityReducer";
 
-export default function DailyActivity({ dateInfo, dailyActivityInfo }) {
+export default function DailyActivity({ dateInfo, oneStudentData }) {
   const [data, setData] = React.useState(dateInfo.routine);
-  const [time, setTime] = React.useState("");
-  const [activity, setActivity] = React.useState("");
+  const [arrive, setArrive] = React.useState("");
+  const [pickup, setPickup] = React.useState("");
   const dispatch = useDispatch();
-  const handleDelete = (id) => {
-    const ok = window.confirm("Are you sure you want to delete this?");
-    if (!ok) {
-      return;
-    }
-    dispatch(deleteRoutine(dateInfo._id, { routineId: id }));
-    console.log({
-      date: dateInfo._id,
-      id,
-    });
-  };
 
   const handleAddRoutine = (e) => {
     e.preventDefault();
     const newRoutine = {
-      time: time,
-      activity: activity,
+      arrive: arrive,
+      pickup: pickup,
     };
     dispatch(addActivityRoutine(dateInfo._id, newRoutine));
-    setTime("");
-    setActivity("");
+    setArrive("");
+    setPickup("");
   };
 
   const columns = [
@@ -50,28 +35,13 @@ export default function DailyActivity({ dateInfo, dailyActivityInfo }) {
         return <div>{params.row.activity}</div>;
       },
     },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 100,
-      renderCell: (params) => {
-        return (
-          <div className="studentList">
-            <DeleteOutlineIcon
-              onClick={() => handleDelete(params.row._id)}
-              className="studentListDelete"
-            />
-          </div>
-        );
-      },
-    },
   ];
   return (
     <div className="dailyActivityContainer">
       <div className="dailyActivityTop">
         <h1>
-          {dailyActivityInfo.firstName} {dailyActivityInfo.lastName} - class:{" "}
-          {dailyActivityInfo.class}
+          {oneStudentData.firstName} {oneStudentData.lastName} - class:{" "}
+          {oneStudentData.class}
         </h1>
         <h2>{dateInfo.date}</h2>
         <h3>Time to arrive and pickup</h3>
@@ -87,33 +57,33 @@ export default function DailyActivity({ dateInfo, dailyActivityInfo }) {
 
       <form className="dailyActivityForm" onSubmit={handleAddRoutine}>
         <div className="dailyActivityItem">
-          <label>Time</label>
+          <label>Arrival time</label>
           <input
             required
             className="dailyActivityInput time"
-            onChange={(e) => setTime(e.target.value)}
-            value={time}
+            onChange={(e) => setArrive(e.target.value)}
+            value={arrive}
           />
         </div>
         <div className="dailyActivityItem">
-          <label>Activity</label>
+          <label>Pickup time</label>
           <input
             required
-            className="dailyActivityInput activity"
-            onChange={(e) => setActivity(e.target.value)}
-            value={activity}
+            className="dailyActivityInput time"
+            onChange={(e) => setPickup(e.target.value)}
+            value={pickup}
           />
         </div>
         <div>
-          <button className="dailyActivityButton">Add activity</button>
+          <button className="dailyActivityButton">Add Time</button>
         </div>
       </form>
       <div className="dailyActivityTable">
         <DataGrid
           rows={data}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pageSize={8}
+          rowsPerPageOptions={[8]}
           disableSelectionOnClick
           getRowId={(row) => row._id}
         />

@@ -1,15 +1,15 @@
-.teacher {
+.profile {
   flex: 4;
   padding: 20px;
 }
 
-.teacherTitleContainer {
+.profileTitleContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.teacherAddButton {
+.profileAddButton {
   width: 80px;
   border: none;
   padding: 5px;
@@ -21,23 +21,23 @@
   transition: all 0.3s ease;
 }
 
-.teacherAddButton:hover {
+.profileAddButton:hover {
   background-color: #8e5ccf;
 }
 
-.teacherContainer {
+.profileContainer {
   display: flex;
   margin-top: 20px;
 }
 
-.teacherShow {
+.profileShow {
   flex: 1;
   padding: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px #000000;
   box-shadow: 0px 0px 15px -10px #000000;
 }
 
-.teacherUpdate {
+.profileUpdate {
   flex: 2;
   padding: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px #000000;
@@ -45,97 +45,97 @@
   margin-left: 20px;
 }
 
-.teacherShowTop {
+.profileShowTop {
   display: flex;
   align-items: center;
 }
 
-.teacherShowImg {
+.profileShowImg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.teacherShowTopTitle {
+.profileShowTopTitle {
   display: flex;
   flex-direction: column;
   margin-left: 20px;
 }
 
-.teacherShowName {
+.profileShowName {
   font-weight: 600;
 }
 
-.teacherShowAge {
+.profileShowAge {
   font-weight: 300;
 }
 
-.teacherShowBottom {
+.profileShowBottom {
   margin-top: 20px;
 }
 
-.teacherShowTitle {
+.profileShowTitle {
   font-size: 14px;
   font-weight: 600;
   color: #a46fe0;
 }
 
-.teacherShowInfo {
+.profileShowInfo {
   display: flex;
   align-items: center;
   margin: 20px 0;
   color: #444;
 }
 
-.teacherShowIcon {
+.profileShowIcon {
   font-size: 16px !important;
 }
 
-.teacherShowInfoTitle {
+.profileShowInfoTitle {
   margin-left: 10px;
 }
 
-.teacherUpdateTitle {
+.profileUpdateTitle {
   font-style: 24px;
   font-weight: 600;
 }
 
-.teacherUpdateForm {
+.profileUpdateForm {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
-.teacherUpdateItem {
+.profileUpdateItem {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
 }
 
-.teacherUpdateItem > label {
+.profileUpdateItem > label {
   margin-bottom: 5px;
   font-style: 14px;
 }
 
-.teacherUpdateInput {
+.profileUpdateInput {
   border: none;
   width: 250px;
   border-bottom: 1px solid gray;
 }
 
-.teacherUpdateRight {
+.profileUpdateRight {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.teacherUpdateUpload {
+.profileUpdateUpload {
   display: flex;
   align-items: center;
 }
 
-.teacherUpdateImg {
+.profileUpdateImg {
   width: 100px;
   height: 100px;
   border-radius: 10px;
@@ -143,11 +143,11 @@
   margin-right: 20px;
 }
 
-.teacherUpdateIcon {
+.profileUpdateIcon {
   cursor: pointer;
 }
 
-.teacherUpdateButton {
+.profileUpdateButton {
   border-radius: 5px;
   border: none;
   padding: 5px;
@@ -158,6 +158,6 @@
   transition: all 0.3s ease;
 }
 
-.teacherUpdateButton:hover {
+.profileUpdateButton:hover {
   background-color: rgb(70, 73, 221);
 }

@@ -72,14 +72,10 @@ router.put("/:id", async (req, res) => {
     firstName: body.firstName,
     lastName: body.lastName,
     email: body.email,
-    class: body.class,
-    age: body.age,
     avartar: body.avatar,
     parentsInfo: {
       name1: body.parentsInfo.name1,
-      name2: body.parentsInfo.name2,
       phone1: body.parentsInfo.phone1,
-      phone2: body.parentsInfo.phone2,
     },
   };
 

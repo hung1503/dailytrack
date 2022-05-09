@@ -112,8 +112,8 @@ export default function DailyActivity({ dateInfo, dailyActivityInfo }) {
         <DataGrid
           rows={data}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pageSize={9}
+          rowsPerPageOptions={[9]}
           disableSelectionOnClick
           getRowId={(row) => row._id}
         />

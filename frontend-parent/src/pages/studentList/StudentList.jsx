@@ -141,8 +141,8 @@ export default function StudentList({ students }) {
       <DataGrid
         rows={foundData}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={8}
+        rowsPerPageOptions={[8]}
         disableSelectionOnClick
       />
     </div>

@@ -22,12 +22,18 @@ const createDate = async (newObject) => {
 };
 
 const creatActivity = (id, newObject) => {
-  const response = axios.post(`${baseUrl}/${id}/routine`, newObject);
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = axios.post(`${baseUrl}/${id}/routine`, newObject, config);
   return response.then((response) => response.data);
 };
 
 const addingParentTime = (id, newObject) => {
-  const response = axios.put(`${baseUrl}/${id}/parentTime`, newObject);
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = axios.post(`${baseUrl}/${id}/parentTime`, newObject, config);
   return response.then((response) => response.data);
 };
 
@@ -48,7 +54,8 @@ const removeRoutine = (id, object) => {
   const config = {
     headers: { Authorization: token },
   };
-  return axios.delete(`${baseUrl}/${id}/routine`, object, config);
+  const response = axios.post(`${baseUrl}/${id}/routine`, object, config);
+  return response.then((response) => response.data);
 };
 
 export default {

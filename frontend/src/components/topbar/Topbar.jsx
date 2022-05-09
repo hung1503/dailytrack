@@ -13,6 +13,11 @@ export default function Topbar({ user, handleLogout }) {
             </Link>
           </div>
           <div className="topRight">
+            <div className="userInfo">
+              <Link to="/profile" className="link">
+                {user.firstname} {user.lastname}
+              </Link>
+            </div>
             <div className="topButton">
               <button onClick={handleLogout}>Log out</button>
             </div>

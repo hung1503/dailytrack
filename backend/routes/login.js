@@ -29,7 +29,12 @@ router.post("/parent", async (req, res) => {
 
   res
     .status(200)
-    .send({ token, username: student.username, firstname: student.firstName });
+    .send({
+      token,
+      username: student.username,
+      firstname: student.firstName,
+      lastname: student.lastName,
+    });
 });
 
 router.post("/teacher", async (req, res) => {
@@ -54,9 +59,12 @@ router.post("/teacher", async (req, res) => {
   //token exprire in 1 day
   const token = jwt.sign(teacherForToken, config.SECRET, { expiresIn: "1d" });
 
-  res
-    .status(200)
-    .send({ token, username: teacher.username, firstname: teacher.firstName });
+  res.status(200).send({
+    token,
+    username: teacher.username,
+    firstname: teacher.firstName,
+    lastname: teacher.lastName,
+  });
 });
 
 module.exports = router;

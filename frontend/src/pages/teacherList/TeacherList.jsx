@@ -6,7 +6,6 @@ import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 
@@ -68,12 +67,8 @@ export default function TeacherList({ teachers }) {
         return (
           <div className="teacherList">
             <Link to={"/teachers/" + params.row.id}>
-              <button className="teacherListEdit">Edit</button>
+              <button className="teacherListEdit">See profiles</button>
             </Link>
-            <DeleteOutlineIcon
-              onClick={() => handleDelete(params.row.id)}
-              className="teacherListDelete"
-            />
           </div>
         );
       },
@@ -103,8 +98,8 @@ export default function TeacherList({ teachers }) {
       <DataGrid
         rows={foundData}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={7}
+        rowsPerPageOptions={[7]}
         disableSelectionOnClick
       />
     </div>

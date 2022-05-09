@@ -3,6 +3,7 @@ import "./app.css";
 import { Route, Routes, useMatch, Link } from "react-router-dom";
 
 import Home from "./pages/home/Home";
+import Profile from "./pages/profile/Profile";
 import TeacherList from "./pages/teacherList/TeacherList";
 import Teacher from "./pages/teacher/Teacher";
 
@@ -48,88 +49,6 @@ function App() {
   const activities = useSelector((state) => state.activities);
   const classes = useSelector((state) => state.classes);
   console.log(classes);
-  const LoginTeachers = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-      const data = new FormData(event.currentTarget);
-      try {
-        const userTeacher = await loginTeacherService.login({
-          username,
-          password,
-        });
-        window.localStorage.setItem("loggedUser", JSON.stringify(userTeacher));
-        console.log(userTeacher);
-        activityService.setToken(userTeacher.token);
-        setUsername("");
-        setPassword("");
-        setUser(userTeacher);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    return (
-      <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <AccountBoxIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Log in as teachers
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
-            >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                id="password"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
-              </Button>
-            </Box>
-          </Box>
-        </Container>
-      </ThemeProvider>
-    );
-  };
 
   useEffect(() => {
     dispatch(initStudent());
@@ -146,6 +65,9 @@ function App() {
       activityService.setToken(user.token);
     }
   }, []);
+  const profileInfo = user
+    ? teachers.find((per) => per.username === user.username)
+    : null;
 
   const teacherMatch = useMatch("/teachers/:id");
   const teacherInfo = teacherMatch
@@ -184,6 +106,91 @@ function App() {
   };
 
   if (!user) {
+    const LoginTeachers = () => {
+      const [username, setUsername] = useState("");
+      const [password, setPassword] = useState("");
+      const handleSubmit = async (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        try {
+          const userTeacher = await loginTeacherService.login({
+            username,
+            password,
+          });
+          window.localStorage.setItem(
+            "loggedUser",
+            JSON.stringify(userTeacher)
+          );
+          console.log(userTeacher);
+          activityService.setToken(userTeacher.token);
+          setUsername("");
+          setPassword("");
+          setUser(userTeacher);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      return (
+        <ThemeProvider theme={theme}>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+              sx={{
+                marginTop: 8,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                <AccountBoxIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Log in as teachers
+              </Typography>
+              <Box
+                component="form"
+                onSubmit={handleSubmit}
+                noValidate
+                sx={{ mt: 1 }}
+              >
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Username"
+                  name="username"
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                  autoFocus
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  id="password"
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Sign In
+                </Button>
+              </Box>
+            </Box>
+          </Container>
+        </ThemeProvider>
+      );
+    };
     return (
       <div>
         <Topbar user={user} handleLogout={handleLogout} />
@@ -199,6 +206,10 @@ function App() {
         <Sidebar />
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route
+            path="/profile"
+            element={<Profile profileInfo={profileInfo} />}
+          />
           <Route
             path="/teachers"
             element={<TeacherList teachers={teachers} />}
