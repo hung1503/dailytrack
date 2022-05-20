@@ -11,7 +11,7 @@ export default function Profile({ profileInfo }) {
   return (
     <div className="profile">
       <div className="profileTitleContainer">
-        <h1 className="profileTitle">Edit profile</h1>
+        <h1 className="profileTitle">Teacher's profile</h1>
         <Link to="/newprofile">
           <button className="profileAddButton">Create</button>
         </Link>

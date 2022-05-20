@@ -2,3 +2,17 @@
   flex: 4;
   height: 400px;
 }
+
+.homeItem {
+  padding: 5px;
+  display: flex;
+  border-radius: 10px;
+  justify-content: center;
+}
+h2 {
+  margin-left: 10px;
+}
+.homeIcon {
+  margin-right: 5px;
+  font-size: 100px !important;
+}

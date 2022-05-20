@@ -1,6 +1,5 @@
 import React from "react";
 import "./sidebar.css";
-import HomeIcon from "@mui/icons-material/Home";
 import ChildCareIcon from "@mui/icons-material/ChildCare";
 import BookIcon from "@mui/icons-material/Book";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -20,7 +19,7 @@ export default function Sidebar() {
             </Link>
             <Link to="/classes" className="link">
               <li className="sidebarListItem">
-                <BookIcon /> Classes
+                <BookIcon className="sidebarIcon" /> Classes
               </li>
             </Link>
             <Link to="/teachers" className="link">

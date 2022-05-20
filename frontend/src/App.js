@@ -50,7 +50,6 @@ function App() {
   const teachers = useSelector((state) => state.teachers);
   const activities = useSelector((state) => state.activities);
   const classes = useSelector((state) => state.classes);
-  console.log(classes);
 
   useEffect(() => {
     dispatch(initStudent());
