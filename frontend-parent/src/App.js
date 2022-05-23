@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Profiler } from "react";
 import Home from "./pages/home/Home";
 import "./app.css";
 import { Route, Routes, useMatch } from "react-router-dom";
@@ -58,17 +58,6 @@ function App() {
       activityService.setToken(user.token);
     }
   }, []);
-
-  const oneStudentData = user
-    ? students.find((student) => student.username === user.username)
-    : null;
-
-  const dailyActivityMatch = useMatch("/activities/:date");
-  const dateInfo = dailyActivityMatch
-    ? oneStudentData.activities.find(
-        (date) => date.date === dailyActivityMatch.params.date
-      )
-    : null;
 
   const handleLogout = () => {
     window.localStorage.removeItem("loggedStudent");
@@ -177,26 +166,15 @@ function App() {
         <Notification />
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route path="/profile" element={<Student user={user} />} />
           <Route
             path="/teachers"
             element={<TeacherList teachers={teachers} />}
           />
+          <Route path="/activities" element={<Activities user={user} />} />
           <Route
-            path="/students"
-            element={<Student oneStudentData={oneStudentData} />}
-          />
-          <Route
-            path="/activities"
-            element={<Activities oneStudentData={oneStudentData} />}
-          />
-          <Route
-            path="/activities/:date"
-            element={
-              <DailyActivity
-                dateInfo={dateInfo}
-                oneStudentData={oneStudentData}
-              />
-            }
+            path="/activities/:dateId"
+            element={<DailyActivity user={user} />}
           />
         </Routes>
       </div>

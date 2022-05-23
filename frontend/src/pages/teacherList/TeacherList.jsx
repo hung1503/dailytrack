@@ -8,13 +8,12 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function TeacherList({ teachers }) {
+export default function TeacherList() {
+  const teachers = useSelector((state) => state.teachers);
   const [data, setData] = React.useState(teachers);
   const [searchQuery, setSearchQuery] = React.useState("");
-  const handleDelete = (id) => {
-    setData(data.filter((row) => row.id !== id));
-  };
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);

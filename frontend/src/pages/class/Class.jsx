@@ -3,9 +3,18 @@ import "./class.css";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function Class({ classInfo }) {
-  const [data, setData] = React.useState(classInfo);
+export default function Class() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const classData = useSelector((state) =>
+    state.classes.find((u) => u._id === id)
+  );
+  if (!classData) {
+    return <div>Loading...</div>;
+  }
 
   const columns = [
     {
@@ -61,9 +70,9 @@ export default function Class({ classInfo }) {
   ];
   return (
     <div className="classContainer">
-      <h1>Class: {classInfo.class}</h1>
+      <h1>Class: {classData.class}</h1>
       Teacher:{" "}
-      {classInfo.teachers.map((info) => (
+      {classData.teachers.map((info) => (
         <div key={info.id}>
           <p>
             {info.firstName} {info.lastName}
@@ -72,7 +81,7 @@ export default function Class({ classInfo }) {
       ))}
       <div className="classTable">
         <DataGrid
-          rows={data.students}
+          rows={classData.students}
           columns={columns}
           pageSize={5}
           rowsPerPageOptions={[5]}

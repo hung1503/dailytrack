@@ -8,6 +8,13 @@ const studentReducer = (state = [], action) => {
       return [...state, action.data];
     case "DELETE_STUDENT":
       return state.filter((student) => student.id !== action.id);
+    case "UPDATE_STUDENT":
+      const id = action.data.id;
+      const student = state.find((student) => student.id === id);
+      const updatedStudent = { ...student, object: action.data.object };
+      return state.map((student) =>
+        student.id === id ? updatedStudent : student
+      );
     default:
       return state;
   }
@@ -23,4 +30,16 @@ export const initStudent = () => {
   };
 };
 
+export const updateStudent = (id, object) => {
+  return async (dispatch) => {
+    await studentService.update(id, object);
+    dispatch({
+      type: "UPDATE_STUDENT",
+      data: {
+        id,
+        object,
+      },
+    });
+  };
+};
 export default studentReducer;

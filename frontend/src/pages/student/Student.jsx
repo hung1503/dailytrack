@@ -4,8 +4,18 @@ import EmailIcon from "@mui/icons-material/Email";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import PhoneIcon from "@mui/icons-material/Phone";
 import ClassIcon from "@mui/icons-material/Class";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function Student({ studentInfo }) {
+export default function Student() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const student = useSelector((state) =>
+    state.students.find((u) => u.id === id)
+  );
+  if (!student) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="student">
       <div className="studentTitleContainer">
@@ -14,47 +24,45 @@ export default function Student({ studentInfo }) {
       <div className="studentContainer">
         <div className="studentShow">
           <div className="studentShowTop">
-            <img src={studentInfo.avatar} alt="" className="studentShowImg" />
+            <img src={student.avatar} alt="" className="studentShowImg" />
             <div className="studentShowTopTitle">
               <span className="studentShowName">
-                {studentInfo.firstName} {studentInfo.lastName}
+                {student.firstName} {student.lastName}
               </span>
-              <span className="studentShowAge">Age: {studentInfo.age}</span>
+              <span className="studentShowAge">Age: {student.age}</span>
             </div>
           </div>
           <div className="studentShowBottom">
             <span className="studentShowTitle">Info</span>
             <div className="studentShowInfo">
               <ClassIcon className="studentShowIcon" />
-              <span className="studentShowInfoTitle">{studentInfo.class}</span>
+              <span className="studentShowInfoTitle">{student.class}</span>
             </div>
             <div className="studentShowInfo">
               <EmailIcon className="studentShowIcon" />
-              <span className="studentShowInfoTitle">{studentInfo.email}</span>
+              <span className="studentShowInfoTitle">{student.email}</span>
             </div>
             <div className="studentShowInfo">
               <AddLocationAltIcon className="studentShowIcon" />
-              <span className="studentShowInfoTitle">
-                {studentInfo.address}
-              </span>
+              <span className="studentShowInfoTitle">{student.address}</span>
             </div>
             <span className="studentShowTitle">Parents' Info</span>
             <div className="studentsShowIcon">
-              <span>{studentInfo.parentsInfo.name1}</span>
+              <span>{student.parentsInfo.name1}</span>
             </div>
             <div className="studentShowInfo">
               <PhoneIcon className="studentShowIcon" />
               <span className="studentShowInfoTitle">
-                {studentInfo.parentsInfo.phone1}
+                {student.parentsInfo.phone1}
               </span>
             </div>
             <div className="studentsShowIcon">
-              <span>{studentInfo.parentsInfo.name2}</span>
+              <span>{student.parentsInfo.name2}</span>
             </div>
             <div className="studentShowInfo">
               <PhoneIcon className="studentShowIcon" />
               <span className="studentShowInfoTitle">
-                {studentInfo.parentsInfo.phone2}
+                {student.parentsInfo.phone2}
               </span>
             </div>
           </div>

@@ -5,9 +5,9 @@ const activityReducer = (state = [], action) => {
     case "INIT_ACTIVITY":
       return action.data;
     case "ADD_ACTIVITY":
-      return [...state, action.data];
+      return state.concat(action.data);
     case "DELETE_ACTIVITY":
-      return state.filter((activity) => activity._id !== action.id);
+      return state.filter((u) => u._id !== action.id);
     case "DELETE_ROUTINE":
       const stateRoutine = state.find(
         (activity) => activity._id === action.data.id

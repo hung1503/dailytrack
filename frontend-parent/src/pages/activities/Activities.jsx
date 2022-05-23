@@ -1,25 +1,16 @@
 import React from "react";
 import "./activities.css";
 import { DataGrid } from "@mui/x-data-grid";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addActivity } from "../../reducer/activityReducer";
+import { useSelector } from "react-redux";
 
-export default function Activities({ oneStudentData }) {
-  const [data, setData] = React.useState(oneStudentData.activities);
-  const [date, setDate] = React.useState("");
-  const handleDelete = (id) => {
-    console.log(id);
-    setData(data.filter((row) => row._id !== id));
-  };
-  const dispatch = useDispatch();
-
-  const handleNewDate = (e) => {
-    dispatch(addActivity({ date: date, studentId: oneStudentData.id }));
-    setDate("");
-  };
-
+export default function Activities({ user }) {
+  const student = useSelector((state) =>
+    state.students.find((u) => u.username === user.username)
+  );
+  if (!student) {
+    return <div>loading ...</div>;
+  }
   const columns = [
     {
       field: "date",
@@ -57,7 +48,7 @@ export default function Activities({ oneStudentData }) {
       renderCell: (params) => {
         return (
           <div className="activityList">
-            <Link to={"/activities/" + params.row.date}>
+            <Link to={"/activities/" + params.row._id}>
               <button className="activityListEdit">See details</button>
             </Link>
           </div>
@@ -70,12 +61,11 @@ export default function Activities({ oneStudentData }) {
     <div className="activityListContainer">
       <div className="activityListUp">
         <h1 className="activityTitle">
-          {oneStudentData.firstName} {oneStudentData.lastName} - Class:{" "}
-          {oneStudentData.class}
+          {student.firstName} {student.lastName} - Class: {student.class}
         </h1>
       </div>
       <DataGrid
-        rows={data}
+        rows={student.activities}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}

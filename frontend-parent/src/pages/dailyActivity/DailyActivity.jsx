@@ -1,22 +1,36 @@
 import React from "react";
 import "./dailyActivity.css";
 import { DataGrid } from "@mui/x-data-grid";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addParentTime } from "../../reducer/activityReducer";
+import { useParams } from "react-router-dom";
 
-export default function DailyActivity({ dateInfo, oneStudentData }) {
-  const [data, setData] = React.useState(dateInfo.routine);
+export default function DailyActivity({ user }) {
+  const profile = useSelector((state) =>
+    state.students.find((u) => u.username === user.username)
+  );
+  const { dateId } = useParams();
+  const activities = useSelector((state) =>
+    state.activities.find((u) => u._id === dateId)
+  );
+  console.log(activities);
   const [arrive, setArrive] = React.useState("");
   const [pickup, setPickup] = React.useState("");
   const dispatch = useDispatch();
 
+  if (!profile) {
+    return <div>loading ...</div>;
+  }
+
+  if (!activities) {
+    return <div>loading ...</div>;
+  }
   const handleAddRoutine = (e) => {
-    e.preventDefault();
     const newRoutine = {
       arrival: arrive,
       departure: pickup,
     };
-    dispatch(addParentTime(dateInfo._id, newRoutine));
+    dispatch(addParentTime(activities._id, newRoutine));
     setArrive("");
     setPickup("");
   };
@@ -40,15 +54,14 @@ export default function DailyActivity({ dateInfo, oneStudentData }) {
     <div className="dailyActivityContainer">
       <div className="dailyActivityTop">
         <h1>
-          {oneStudentData.firstName} {oneStudentData.lastName} - class:{" "}
-          {oneStudentData.class}
+          {profile.firstName} {profile.lastName} - class: {profile.class}
         </h1>
-        <h2>{dateInfo.date}</h2>
+        <h2>{activities.date}</h2>
         <h3>Time to arrive and pickup</h3>
-        {dateInfo.parentTime ? (
+        {activities.parentTime ? (
           <div>
-            <p>Arrival time: {dateInfo.parentTime.arrival}</p>
-            <p>Pickup time: {dateInfo.parentTime.departure}</p>
+            <p>Arrival time: {activities.parentTime.arrival}</p>
+            <p>Pickup time: {activities.parentTime.departure}</p>
           </div>
         ) : (
           <p>No arrival time</p>
@@ -80,7 +93,7 @@ export default function DailyActivity({ dateInfo, oneStudentData }) {
       </form>
       <div className="dailyActivityTable">
         <DataGrid
-          rows={data}
+          rows={activities.routine}
           columns={columns}
           pageSize={8}
           rowsPerPageOptions={[8]}

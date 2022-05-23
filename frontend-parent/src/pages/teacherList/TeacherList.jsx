@@ -6,16 +6,12 @@ import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import SearchIcon from "@mui/icons-material/Search";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function TeacherList({ teachers }) {
-  const [data, setData] = React.useState(teachers);
+export default function TeacherList() {
+  const teachers = useSelector((state) => state.teachers);
   const [searchQuery, setSearchQuery] = React.useState("");
-  const handleDelete = (id) => {
-    setData(data.filter((row) => row.id !== id));
-  };
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
@@ -23,8 +19,8 @@ export default function TeacherList({ teachers }) {
 
   const foundData =
     searchQuery === ""
-      ? data
-      : data.filter((row) => {
+      ? teachers
+      : teachers.filter((row) => {
           return row.firstName
             .toLowerCase()
             .includes(searchQuery.toLowerCase());

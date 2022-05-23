@@ -8,12 +8,12 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function ClassList({ classes }) {
+export default function ClassList() {
+  const classes = useSelector((state) => state.classes);
   const [data, setData] = React.useState(classes);
   const [searchQuery, setSearchQuery] = React.useState("");
-
-  console.log(data);
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };

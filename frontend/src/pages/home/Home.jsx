@@ -15,9 +15,9 @@ const Home = () => {
           <Grid item xs={12} sm={6} md={4}>
             <div className="homeItem">
               <Link to="/students" className="link">
-                <a className="homeItem">
+                <span className="homeItem">
                   <ChildCareIcon className="homeIcon" />
-                </a>
+                </span>
                 <h2>Students</h2>
               </Link>
             </div>
@@ -25,9 +25,9 @@ const Home = () => {
           <Grid item xs={12} sm={6} md={4}>
             <div className="homeItem">
               <Link to="/classes" className="link">
-                <a className="homeItem">
+                <span className="homeItem">
                   <BookIcon className="homeIcon" />
-                </a>
+                </span>
                 <h2>Classes</h2>
               </Link>
             </div>
@@ -35,9 +35,9 @@ const Home = () => {
           <Grid item xs={12} sm={6} md={4}>
             <div className="homeItem">
               <Link to="/teachers" className="link">
-                <a className="homeItem">
+                <span className="homeItem">
                   <AccountBoxIcon className="homeIcon" />
-                </a>
+                </span>
                 <h2>Teachers</h2>
               </Link>
             </div>

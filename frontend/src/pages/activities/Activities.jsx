@@ -2,13 +2,21 @@ import React from "react";
 import "./activities.css";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { addActivity, deleteActivity } from "../../reducer/activityReducer";
 
-export default function Activities({ activitiesInfo }) {
-  const [data, setData] = React.useState(activitiesInfo.activities);
+export default function Activities() {
+  const { id } = useParams();
+  const studentAct = useSelector((state) =>
+    state.students.find((u) => u.id === id)
+  );
+  const dispatch = useDispatch();
   const [date, setDate] = React.useState("");
+  if (!studentAct) {
+    return <div>Loading...</div>;
+  }
+  console.log(studentAct);
   const handleDelete = (id) => {
     const ok = window.confirm("Are you sure you want to delete this?");
     if (!ok) {
@@ -16,10 +24,10 @@ export default function Activities({ activitiesInfo }) {
     }
     dispatch(deleteActivity(id));
   };
-  const dispatch = useDispatch();
 
   const handleNewDate = (e) => {
-    dispatch(addActivity({ date: date, studentId: activitiesInfo.id }));
+    dispatch(addActivity({ date: date, studentId: studentAct.id }));
+    console.log(date);
     setDate("");
   };
 
@@ -62,10 +70,7 @@ export default function Activities({ activitiesInfo }) {
           <div className="activityList">
             <Link
               to={
-                "/students/" +
-                activitiesInfo.id +
-                "/activities/" +
-                params.row.date
+                "/students/" + studentAct.id + "/activities/" + params.row._id
               }
             >
               <button className="activityListEdit">See details</button>
@@ -84,8 +89,8 @@ export default function Activities({ activitiesInfo }) {
     <div className="activityListContainer">
       <div className="activityListUp">
         <h1 className="activityTitle">
-          {activitiesInfo.firstName} {activitiesInfo.lastName} - Class:{" "}
-          {activitiesInfo.class}
+          {studentAct.firstName} {studentAct.lastName} - Class:{" "}
+          {studentAct.class}
         </h1>
         <form className="activityForm" onSubmit={handleNewDate}>
           <div className="activityListItem">
@@ -102,7 +107,7 @@ export default function Activities({ activitiesInfo }) {
         </form>
       </div>
       <DataGrid
-        rows={data}
+        rows={studentAct.activities}
         columns={columns}
         pageSize={8}
         rowsPerPageOptions={[8]}

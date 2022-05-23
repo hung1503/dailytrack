@@ -14,7 +14,7 @@ export default function Topbar({ user, handleLogout }) {
           </div>
           <div className="topRight">
             <div className="userInfo">
-              <Link to="/students" className="link">
+              <Link to="/profile" className="link">
                 {user.firstname} {user.lastname}
               </Link>
             </div>

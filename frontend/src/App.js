@@ -46,10 +46,6 @@ function App() {
   const [user, setUser] = useState(null);
 
   const dispatch = useDispatch();
-  const students = useSelector((state) => state.students);
-  const teachers = useSelector((state) => state.teachers);
-  const activities = useSelector((state) => state.activities);
-  const classes = useSelector((state) => state.classes);
 
   useEffect(() => {
     dispatch(initStudent());
@@ -66,40 +62,6 @@ function App() {
       activityService.setToken(user.token);
     }
   }, []);
-  const profileInfo = user
-    ? teachers.find((per) => per.username === user.username)
-    : null;
-
-  const teacherMatch = useMatch("/teachers/:id");
-  const teacherInfo = teacherMatch
-    ? teachers.find((teacher) => teacher.id === teacherMatch.params.id)
-    : null;
-
-  const studentMatch = useMatch("/students/:id");
-  const studentInfo = studentMatch
-    ? students.find((student) => student.id === studentMatch.params.id)
-    : null;
-
-  const activitiesMatch = useMatch("/students/:id/activities");
-  const activitiesInfo = activitiesMatch
-    ? students.find((student) => student.id === activitiesMatch.params.id)
-    : null;
-
-  const dailyActivityMatch = useMatch("/students/:id/activities/:date");
-  const dailyActivityInfo = dailyActivityMatch
-    ? students.find((student) => student.id === dailyActivityMatch.params.id)
-    : null;
-
-  const dateInfo = dailyActivityMatch
-    ? dailyActivityInfo.activities.find(
-        (date) => date.date === dailyActivityMatch.params.date
-      )
-    : null;
-
-  const classMatch = useMatch("/classes/:id");
-  const classInfo = classMatch
-    ? classes.find((classInfo) => classInfo._id === classMatch.params.id)
-    : null;
 
   const handleLogout = () => {
     window.localStorage.removeItem("loggedUser");
@@ -211,44 +173,18 @@ function App() {
         <Notification />
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile user={user} />} />
+          <Route path="/teachers" element={<TeacherList />} />
+          <Route path="/teachers/:id" element={<Teacher />} />
+          <Route path="/students" element={<StudentList />} />
+          <Route path="/students/:id" element={<Student />} />
+          <Route path="/students/:id/activities" element={<Activities />} />
           <Route
-            path="/profile"
-            element={<Profile profileInfo={profileInfo} />}
+            path="/students/:id/activities/:dateId"
+            element={<DailyActivity />}
           />
-          <Route
-            path="/teachers"
-            element={<TeacherList teachers={teachers} />}
-          />
-          <Route
-            path="/teachers/:id"
-            element={<Teacher teacherInfo={teacherInfo} />}
-          />
-          <Route
-            path="/students"
-            element={<StudentList students={students} />}
-          />
-          <Route
-            path="/students/:id"
-            element={<Student studentInfo={studentInfo} />}
-          />
-          <Route
-            path="/students/:id/activities"
-            element={<Activities activitiesInfo={activitiesInfo} />}
-          />
-          <Route
-            path="/students/:id/activities/:date"
-            element={
-              <DailyActivity
-                dateInfo={dateInfo}
-                dailyActivityInfo={dailyActivityInfo}
-              />
-            }
-          />
-          <Route path="/classes" element={<ClassList classes={classes} />} />
-          <Route
-            path="/classes/:id"
-            element={<Class classInfo={classInfo} />}
-          />
+          <Route path="/classes" element={<ClassList />} />
+          <Route path="/classes/:id" element={<Class />} />
         </Routes>
       </div>
     </div>

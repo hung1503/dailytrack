@@ -2,36 +2,46 @@ import React from "react";
 import "./dailyActivity.css";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addActivityRoutine,
   deleteRoutine,
 } from "../../reducer/activityReducer";
 
-export default function DailyActivity({ dateInfo, dailyActivityInfo }) {
-  const [data, setData] = React.useState(dateInfo.routine);
+export default function DailyActivity() {
+  const { id } = useParams();
+  const { dateId } = useParams();
+  const studentAct = useSelector((state) =>
+    state.students.find((u) => u.id === id)
+  );
+  const activities = useSelector((state) =>
+    state.activities.find((u) => u._id === dateId)
+  );
+  const dispatch = useDispatch();
   const [time, setTime] = React.useState("");
   const [activity, setActivity] = React.useState("");
-  const dispatch = useDispatch();
+  if (!studentAct) {
+    return <div>Loading...</div>;
+  }
+  if (!activities) {
+    return <div>Loading...</div>;
+  }
+
   const handleDelete = (id) => {
     const ok = window.confirm("Are you sure you want to delete this?");
     if (!ok) {
       return;
     }
-    dispatch(deleteRoutine(dateInfo._id, { routineId: id }));
-    console.log({
-      date: dateInfo._id,
-      id,
-    });
+    dispatch(deleteRoutine(activities._id, { routineId: id }));
   };
 
   const handleAddRoutine = (e) => {
-    e.preventDefault();
     const newRoutine = {
       time: time,
       activity: activity,
     };
-    dispatch(addActivityRoutine(dateInfo._id, newRoutine));
+    dispatch(addActivityRoutine(activities._id, newRoutine));
     setTime("");
     setActivity("");
   };
@@ -70,15 +80,15 @@ export default function DailyActivity({ dateInfo, dailyActivityInfo }) {
     <div className="dailyActivityContainer">
       <div className="dailyActivityTop">
         <h1>
-          {dailyActivityInfo.firstName} {dailyActivityInfo.lastName} - class:{" "}
-          {dailyActivityInfo.class}
+          {studentAct.firstName} {studentAct.lastName} - class:{" "}
+          {studentAct.class}
         </h1>
-        <h2>{dateInfo.date}</h2>
+        <h2>{activities.date}</h2>
         <h3>Time to arrive and pickup</h3>
-        {dateInfo.parentTime ? (
+        {activities.parentTime ? (
           <div>
-            <p>Arrival time: {dateInfo.parentTime.arrival}</p>
-            <p>Pickup time: {dateInfo.parentTime.departure}</p>
+            <p>Arrival time: {activities.parentTime.arrival}</p>
+            <p>Pickup time: {activities.parentTime.departure}</p>
           </div>
         ) : (
           <p>No arrival time</p>
@@ -110,7 +120,7 @@ export default function DailyActivity({ dateInfo, dailyActivityInfo }) {
       </form>
       <div className="dailyActivityTable">
         <DataGrid
-          rows={data}
+          rows={activities.routine}
           columns={columns}
           pageSize={9}
           rowsPerPageOptions={[9]}
